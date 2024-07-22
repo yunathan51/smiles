@@ -11,7 +11,7 @@ Queries the Smiles API to fetch flights based on the parameters provided by the 
 
 
 
-**Issues**
+**Issues**\
 Apparently queries for flights outside Brazil dont work, might take a look at that later if i manage to get some freetime.
 
 -----------\
