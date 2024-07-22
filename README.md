@@ -1,6 +1,6 @@
 # **Smiles Flight Finder**
 
-This application queries the Smiles API to fetch flights based on user-provided parameters through a localhost interface.
+This application queries the Smiles API to fetch flights based on user-provided parameters through a localhost.
 
 ## **How to Use**
 
@@ -12,7 +12,7 @@ This application queries the Smiles API to fetch flights based on user-provided 
 ## **Issues**
 
 - **International Flights:** Queries for flights outside Brazil currently do not work. This will be addressed when time permits.
-- **API Stability:** The Smiles API is unstable. If you don't get any results, visit [Smiles](https://www.smiles.com.br/home) and search for flights manually. If the page is blank except for the header, the API is down.
+- **API Stability:** The Smiles API is pretty unstable. If you don't get any results, visit [Smiles](https://www.smiles.com.br/home) and search for flights manually. If the page is blank except for the header, the API is down.
 
 ## **Additional Information**
 
