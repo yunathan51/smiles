@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0069AF;
+}
+
+.buscas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.busca-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.departureAirPort, .arrivalAirPort, .departureDate, .passengerAmount, .searchButton {
+    width: 100px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+input[type=date]:invalid {
+    color: #999;
+}
+
+
+
+
+.resultados-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.resultados-container ul {
+    list-style-type: none; /* Remove os marcadores padrão */
+    padding: 0;
+    margin: 0;
+}
+
+.resultados-container li {
+    background: #ffffff; /* Cor de fundo para cada item da lista */
+    border: 1px solid #ddd; /* Borda ao redor de cada item */
+    border-radius: 8px; /* Bordas arredondadas */
+    margin-bottom: 10px; /* Espaço entre os itens */
+    padding: 15px; /* Espaçamento interno */
+    font-family: Arial, sans-serif; /* Fonte */
+
+    /* Sem cor de fundo no container da lista */
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
+    width: 600px;
+}
+
