@@ -49,12 +49,15 @@ public class FlightService {
                         sb.append(line);
                     }
                     responseBody = sb.toString();
+                    System.out.println("sucesso");
                 } else {
                     responseBody = response.body().string();
+                    System.out.println("falhou");
                 }
 
                 // Processa o JSON e retorna uma lista de mapas
                 return parseJsonResponse(responseBody);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +69,7 @@ public class FlightService {
     private List<Map<String, Object>> parseJsonResponse(String jsonResponse) {
         JsonObject json = new Gson().fromJson(jsonResponse, JsonObject.class);
         JsonArray flightSegmentList = json.getAsJsonArray("requestedFlightSegmentList");
+        System.out.println(flightSegmentList.size());
 
         List<Map<String, Object>> flights = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -86,6 +90,7 @@ public class FlightService {
                 String arrivalTime = LocalDateTime.parse(arrival.get("date").getAsString()).format(formatter);
 
                 if (fareList.size() > 1) {
+                    System.out.println(fareList);
                     JsonObject secondFare = fareList.get(1).getAsJsonObject();
                     int miles = secondFare.get("miles").getAsInt();
                     double costTax = secondFare.getAsJsonObject("g3").get("costTax").getAsDouble();
