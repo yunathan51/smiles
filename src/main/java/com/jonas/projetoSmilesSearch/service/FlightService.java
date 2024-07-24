@@ -49,15 +49,17 @@ public class FlightService {
                         sb.append(line);
                     }
                     responseBody = sb.toString();
-                    System.out.println("sucesso");
+                    System.out.println("Resposta GZIP: " + responseBody);  // Adiciona log da resposta GZIP
                 } else {
                     responseBody = response.body().string();
-                    System.out.println("falhou");
+                    System.out.println("Resposta: " + responseBody);  // Adiciona log da resposta
                 }
 
                 // Processa o JSON e retorna uma lista de mapas
                 return parseJsonResponse(responseBody);
 
+            } else {
+                System.out.println("Resposta não foi bem-sucedida: " + response.code());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,7 +67,6 @@ public class FlightService {
 
         return new ArrayList<>();
     }
-
     private List<Map<String, Object>> parseJsonResponse(String jsonResponse) {
         JsonObject json = new Gson().fromJson(jsonResponse, JsonObject.class);
         JsonArray flightSegmentList = json.getAsJsonArray("requestedFlightSegmentList");
