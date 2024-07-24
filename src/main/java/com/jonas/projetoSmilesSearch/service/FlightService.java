@@ -1,15 +1,28 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.jonas.projetoSmilesSearch.service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import okhttp3.*;
+import org.springframework.stereotype.Service;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 @Service
 public class FlightService {
 
-    private static final Logger logger = LoggerFactory.getLogger(FlightService.class);
     private static final String API_URL_TEMPLATE = "https://api-air-flightsearch-green.smiles.com.br/v1/airlines/search?cabin=ALL&originAirportCode=%s&destinationAirportCode=%s&departureDate=%s&adults=%d";
     private static final OkHttpClient client = new OkHttpClient();
 
     public List<Map<String, Object>> searchFlights(String originAirportCode, String destinationAirportCode, String departureDate, int adults) {
-        logger.info("searchFlights chamado com: origin={}, destination={}, date={}, adults={}", originAirportCode, destinationAirportCode, departureDate, adults);
         String url = String.format(API_URL_TEMPLATE, originAirportCode, destinationAirportCode, departureDate, adults);
 
         Request request = new Request.Builder()
@@ -36,20 +49,18 @@ public class FlightService {
                         sb.append(line);
                     }
                     responseBody = sb.toString();
-                    logger.info("Resposta GZIP: " + responseBody);  // Adiciona log da resposta GZIP
+                    System.out.println("sucesso");
                 } else {
                     responseBody = response.body().string();
-                    logger.info("Resposta: " + responseBody);  // Adiciona log da resposta
+                    System.out.println("falhou");
                 }
 
                 // Processa o JSON e retorna uma lista de mapas
                 return parseJsonResponse(responseBody);
 
-            } else {
-                logger.error("Resposta não foi bem-sucedida: " + response.code());
             }
         } catch (Exception e) {
-            logger.error("Erro ao chamar API", e);
+            e.printStackTrace();
         }
 
         return new ArrayList<>();
@@ -58,7 +69,7 @@ public class FlightService {
     private List<Map<String, Object>> parseJsonResponse(String jsonResponse) {
         JsonObject json = new Gson().fromJson(jsonResponse, JsonObject.class);
         JsonArray flightSegmentList = json.getAsJsonArray("requestedFlightSegmentList");
-        logger.info("Tamanho da lista de segmentos de voo: " + flightSegmentList.size());
+        System.out.println(flightSegmentList.size());
 
         List<Map<String, Object>> flights = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -79,6 +90,7 @@ public class FlightService {
                 String arrivalTime = LocalDateTime.parse(arrival.get("date").getAsString()).format(formatter);
 
                 if (fareList.size() > 1) {
+                    System.out.println(fareList);
                     JsonObject secondFare = fareList.get(1).getAsJsonObject();
                     int miles = secondFare.get("miles").getAsInt();
                     double costTax = secondFare.getAsJsonObject("g3").get("costTax").getAsDouble();
