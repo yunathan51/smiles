@@ -30,9 +30,6 @@ input[type=date]:invalid {
     color: #999;
 }
 
-
-
-
 .resultados-container {
     display: flex;
     justify-content: center;
@@ -41,22 +38,18 @@ input[type=date]:invalid {
 }
 
 .resultados-container ul {
-    list-style-type: none; /* Remove os marcadores padrão */
+    list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
 .resultados-container li {
-    background: #ffffff; /* Cor de fundo para cada item da lista */
-    border: 1px solid #ddd; /* Borda ao redor de cada item */
-    border-radius: 8px; /* Bordas arredondadas */
-    margin-bottom: 10px; /* Espaço entre os itens */
-    padding: 15px; /* Espaçamento interno */
-    font-family: Arial, sans-serif; /* Fonte */
-
-    /* Sem cor de fundo no container da lista */
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-family: Arial, sans-serif;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-
     width: 600px;
 }
-

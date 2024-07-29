@@ -1,0 +1,4 @@
+com\smiles\smilesFlightFinder\controller\FlightController.class
+com\smiles\smilesFlightFinder\service\FlightService.class
+com\smiles\smilesFlightFinder\model\Flight.class
+com\smiles\smilesFlightFinder\SmilesFlightFinderApplication.class
